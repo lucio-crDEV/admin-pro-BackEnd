@@ -6,8 +6,8 @@
 
 ## Requerimientos
 
-(Node)[https://nodejs.org/en/]
-(mongoDBCompass)[https://www.mongodb.com/try/download/shell]
+[Node](https://nodejs.org/en/)
+[mongoDBCompass](https://www.mongodb.com/try/download/shell)
 
 ### Requerimiento recomendado instalar nodemon
 
