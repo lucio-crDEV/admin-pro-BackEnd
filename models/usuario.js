@@ -30,7 +30,10 @@ const UsuarioSchema = Schema({
 })
 
 
-// Arreglo para cambiaar _id por uid en el response de getUsuarios, y quitando password de cualquier objeto de respuesta, se declara pero no se retorna para extraerlo
+/* 
+    Arreglo para cambiaar _id por uid en el objeto response,
+    se declaran parametros pero no se retornan para eliminarlos o manipularlo a gusto
+*/
 UsuarioSchema.method('toJSON', function() {
     const { __v, _id, password, ...object } = this.toObject();
     object.uid = _id

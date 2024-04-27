@@ -2,6 +2,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/jwt');
 
 const loginUser = async ( req, res = response ) => { 
     
@@ -9,8 +10,9 @@ const loginUser = async ( req, res = response ) => {
     try {
         // Se puede agregar unos segundos de retraso para no dar pistas de que es lo que esta realmente inválido en el proceso de log
         
-        // Verificar email
+        // Verifica que exista user por email
         const usuarioDB = await Usuario.findOne({ email });
+        console.log(usuarioDB);
         
         if( !usuarioDB ){
             return res.status(404).json({
@@ -29,11 +31,11 @@ const loginUser = async ( req, res = response ) => {
         }
 
         // Generar JWT
-        
+        const token = await generarJWT( usuarioDB.id );
 
         res.status(200).json({
             ok: true,
-            msg: 'Hola mundo'
+            token
         });
     } catch ( error ) {
         console.log( error )
@@ -42,8 +44,6 @@ const loginUser = async ( req, res = response ) => {
             msg: 'Hable con el admin'
         })
     };
-
-    
 }
 
 module.exports = {
