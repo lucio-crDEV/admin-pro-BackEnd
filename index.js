@@ -17,8 +17,9 @@ app.use( express.json() );
 // Base de datos
 dbConnection();
 
-// Rutas
+// Rutas (Middleware)
 app.use( '/api/usuarios', require('./routes/usuarios') );
+app.use( '/api/login', require('./routes/auth') );
 
 // Levantando servidor
 app.listen( process.env.PORT, () => {
