@@ -80,7 +80,6 @@ const actualizarHospital = async ( req, res = response )=> {
 
         res.json({
             ok: true,
-            msg: 'actualizarHospital',
             hospital: hospitalActualizado
         });
 
