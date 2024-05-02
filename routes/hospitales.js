@@ -20,8 +20,7 @@ const router = Router();
 
 router.get('/', 
     [
-        // validarJWT,
-        // validarCampos
+        validarJWT,
     ]
     ,getHospitales);
 
