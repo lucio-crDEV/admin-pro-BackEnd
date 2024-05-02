@@ -10,13 +10,13 @@ const getTodo = async (req, res= response )=>{
 
     const regex = new RegExp(busqueda, 'i');
 
-    const [ usuarios, hospitales, medicos ] = await Promise.all([
-        Usuario.find({ nombre: regex }),
-        Hospital.find({ nombre: regex }),
-        Medico.find({ nombre: regex })
-    ]);
-
     try {
+        const [ usuarios, hospitales, medicos ] = await Promise.all([
+            Usuario.find({ nombre: regex }),
+            Hospital.find({ nombre: regex }),
+            Medico.find({ nombre: regex })
+        ]);
+
         res.status(200).json({
             ok: true,
             usuarios,
@@ -40,30 +40,40 @@ const getDocumentosColeccion = async (req, res= response )=>{
 
     let data = [];
 
-    switch ( tabla ) {
-        case 'usuarios':
-            data = await Usuario.find({ nombre: regex })
-            break;
-        case 'hospitales':
-            data = await Hospital.find({ nombre: regex })
-                                 .populate('usuario', 'nombre img')
-            break;
-        case 'medicos':
-            data = await Medico.find({ nombre: regex })
-                               .populate('usuario', 'nombre img')
-                               .populate('hospital', 'nombre img')
-            break;
-        default:
-            return res.status(400).json({
-                ok: false,
-                msg: 'La tabla tiene que ser usuarios/medicos/hospitales'
-            });
-    };
+    try {
+        
+        switch ( tabla ) {
+            case 'usuarios':
+                data = await Usuario.find({ nombre: regex })
+                break;
+            case 'hospitales':
+                data = await Hospital.find({ nombre: regex })
+                                     .populate('usuario', 'nombre img')
+                break;
+            case 'medicos':
+                data = await Medico.find({ nombre: regex })
+                                   .populate('usuario', 'nombre img')
+                                   .populate('hospital', 'nombre img')
+                break;
+            default:
+                return res.status(400).json({
+                    ok: false,
+                    msg: 'La tabla tiene que ser usuarios/medicos/hospitales'
+                });
+        };
+    
+        res.status(200).json({
+            ok: true,
+            resultado: data
+        });
 
-    res.status(200).json({
-        ok: true,
-        resultado: data
-    });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error contacte al administrador'
+        });
+    }
 };
 
 

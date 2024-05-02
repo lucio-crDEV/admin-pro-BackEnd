@@ -51,26 +51,26 @@ const fileUpload = ( req, res = response ) => {
     const path = `./uploads/${ tipo }/${ nombreArchivo }`;
 
     try {
-      // Use the mv() method to place the file somewhere on your server
-    file.mv( path, (err) => {
-    if (err){
-        console.log(err)
-        return res.status(500).json({
-            ok: false,
-            msg :'Error al mover la imagen'
-        });
-    };
+        // Use the mv() method to place the file somewhere on your server
+        file.mv( path, (err) => {
+        if (err){
+            console.log(err)
+            return res.status(500).json({
+                ok: false,
+                msg :'Error al mover la imagen'
+            });
+        };
 
-    //   Actualizar base de datos
-    actualizarImagen( tipo, id, nombreArchivo );
+        // Actualizar base de datos
+        actualizarImagen( tipo, id, nombreArchivo );
 
-    res.json({
-        ok: true,
-        msg: 'Archivo subido',
-        nombreArchivo
+        res.json({
+            ok: true,
+            msg: 'Archivo subido',
+            nombreArchivo
+            })
         });
-    });
-        
+
     } catch (error) {
         console.log(error)
         res.status(500).json({
