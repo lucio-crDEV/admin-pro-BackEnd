@@ -7,8 +7,8 @@ const googleVerify = require('../helpers/google-verify');
 
 const loginUser = async ( req, res = response ) => { 
     
-    const { email, password } = await req.body;
     try {
+        const { email, password } = await req.body;
         // Se puede agregar unos segundos de retraso para no dar pistas de que es lo que esta realmente inválido en el proceso de log
         
         // Verifica que exista user por email
@@ -96,11 +96,25 @@ const renewToken = async ( req, res = response ) => {
     // Generar JWT
     const token = await generarJWT( uid );
 
+    // Obtener usuario por uid
 
-    res.json({
-        ok: true,
-        token
-    })
+    try {
+        const usuario = await Usuario.findById( uid )
+
+        res.status(200).json({
+            ok: true,
+            token,
+            usuario
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al regenerar token hable con el admin'
+        })
+    }
+    
+   
 
 };
 
