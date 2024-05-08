@@ -36,7 +36,7 @@ const actualizarImagen = async ( tipo, id, nombreArchivo ) => {
                 console.log('No es un usuario por id');
                 return false;
             }
-            pathViejo = `./uploads/usuario/${ usuario.img }`;
+            pathViejo = `./uploads/usuarios/${ usuario.img }`;
             borrarImagen( pathViejo );
 
             usuario.img = nombreArchivo;
