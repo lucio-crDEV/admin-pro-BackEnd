@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
-const usuario = require('../models/usuario');
 
 const getUsuarios = async (req, res = response) => {
 
@@ -77,7 +76,7 @@ const crearUsuario = async (req, res = response) => {
 };
 
 const actualizarUsuario = async (req, res = response) => {
-    // TODO validar token y comprobar si es el usuario correcto
+    
 
     const uid = req.params.id;
     
@@ -115,6 +114,9 @@ const actualizarUsuario = async (req, res = response) => {
             });
         }
 
+        // TODO validar token y comprobar si es el usuario correcto
+        campos.role = role
+
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, { new: true });
 
         res.json({
@@ -147,7 +149,7 @@ const borrarUsuario = async (req, res = response) => {
 
         await Usuario.findByIdAndDelete( uid );
 
-        res.status(400).json({
+        res.status(200).json({
             ok: true,
             msg: 'Usuario eliminado'
         });

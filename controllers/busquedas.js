@@ -64,7 +64,7 @@ const getDocumentosColeccion = async (req, res= response )=>{
     
         res.status(200).json({
             ok: true,
-            resultado: data
+            resultados: data
         });
 
     } catch (error) {
