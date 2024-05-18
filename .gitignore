@@ -9,3 +9,6 @@ node_modules/
 #uploads
 ./uploads
 uploads/
+
+#public dir
+public/
