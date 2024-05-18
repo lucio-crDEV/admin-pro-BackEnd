@@ -64,7 +64,7 @@ const fileUpload = ( req, res = response ) => {
         // Actualizar base de datos
         actualizarImagen( tipo, id, nombreArchivo );
 
-        res.json({
+        res.status(200).json({
             ok: true,
             msg: 'Archivo subido',
             nombreArchivo
