@@ -7,6 +7,7 @@ node_modules/
 .env
 
 #uploads
-./uploads
-uploads/
+uploads/hospitales/
+uploads/medicos/
+uploads/usuarios/
 
