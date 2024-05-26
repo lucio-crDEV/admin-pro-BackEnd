@@ -10,5 +10,3 @@ node_modules/
 ./uploads
 uploads/
 
-#public dir
-public/
