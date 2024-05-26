@@ -65,6 +65,11 @@ const customInitFunctions = () => {
     
         $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {
             $(".app-search").toggle(200);
+            $(".app-search input[type='text']").select();
+            $(".app-search").on('submit', function() {
+                $(".app-search input[type='text']").blur();
+                $(".app-search").hide(200);
+            })
         });
         // ============================================================== 
         // Right sidebar options
