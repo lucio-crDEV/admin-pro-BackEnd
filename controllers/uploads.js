@@ -93,7 +93,7 @@ const retornarImagen = ( req, res = response )=>{
     if ( fs.existsSync( pathImg ) ){
         res.sendFile( pathImg );
     } else{
-        const pathImg = path.join(__dirname, `../uploads/sinimagen.png`);
+        const pathImg = 'https://res.cloudinary.com/dxsqipqdb/image/upload/v1716734856/ahfls43dvyruge4udsh1.png'
         res.sendFile( pathImg );
     }
 
